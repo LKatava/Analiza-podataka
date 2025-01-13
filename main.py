@@ -106,3 +106,9 @@ df_combined = pd.merge(
     df_employment_melted, 
     on=['regija', 'Godina']
 )
+
+from sqlalchemy import create_engine
+engine = create_engine('postgresql://postgres:root@localhost:5432/data')
+df_combined.to_sql('srednja', engine, if_exists='replace', index=False)
+
+print("Data successfully written to PostgreSQL")
