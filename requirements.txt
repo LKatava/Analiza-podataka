@@ -4,8 +4,6 @@ xlsxwriter==3.1.1
 plotly==5.22.0
 numpy
 scikit-learn
-subprocess
 flask
-threading
 requests
 sqlalchemy
