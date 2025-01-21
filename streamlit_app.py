@@ -109,44 +109,40 @@ def create_api(df):
 
     return 'http://127.0.0.1:5000/data'
 
-# Main function
-def main():
-    result = subprocess.run(['python', 'main.py'], capture_output=True, text=True)
-    st.success(result.stdout, icon="✅")
+#####
+result = subprocess.run(['python', 'main.py'], capture_output=True, text=True)
+st.success(result.stdout, icon="✅")
 
-    st.title("Analiza Podataka po Regijama")
+st.title("Analiza Podataka po Regijama")
 
-    df = load_data()
-    
-    filtered_data = {
-        'srednje': df[['regija', 'Godina', 'Broj Ucenika', 'Postotak Zaposlenosti']],
-        'fakulteti': df[['regija', 'Godina', 'Broj Studenata', 'Postotak Zaposlenosti']],
-        'diplomirani': df[['regija', 'Godina', 'Broj Diplomiranih Studenata', 'Postotak Zaposlenosti']]
-    }
+df = load_data()
 
-    region_selected = st.selectbox("Odaberi regiju", df['regija'].unique())
+filtered_data = {
+    'srednje': df[['regija', 'Godina', 'Broj Ucenika', 'Postotak Zaposlenosti']],
+    'fakulteti': df[['regija', 'Godina', 'Broj Studenata', 'Postotak Zaposlenosti']],
+    'diplomirani': df[['regija', 'Godina', 'Broj Diplomiranih Studenata', 'Postotak Zaposlenosti']]
+}
 
-    tab1, tab2, tab3, tab4, tab5 = st.tabs(["Srednje Škole", "Fakulteti", "Diplomirani Studenti", "Sve Osobe", "Podaci"])
+region_selected = st.selectbox("Odaberi regiju", df['regija'].unique())
 
-    with tab1:
-        display_tab_content(filtered_data['srednje'], region_selected, 'Broj Ucenika', 'Trendovi za Srednje Škole', 'blue', 1)
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["Srednje Škole", "Fakulteti", "Diplomirani Studenti", "Sve Osobe", "Podaci"])
 
-    with tab2:
-        display_tab_content(filtered_data['fakulteti'], region_selected, 'Broj Studenata', 'Trendovi za Fakultete', 'orange', 2)
+with tab1:
+    display_tab_content(filtered_data['srednje'], region_selected, 'Broj Ucenika', 'Trendovi za Srednje Škole', 'blue', 1)
 
-    with tab3:
-        display_tab_content(filtered_data['diplomirani'], region_selected, 'Broj Diplomiranih Studenata', 'Trendovi za Diplomirane', 'purple', 3)
+with tab2:
+    display_tab_content(filtered_data['fakulteti'], region_selected, 'Broj Studenata', 'Trendovi za Fakultete', 'orange', 2)
 
-    with tab4:
-        fig = plot_combined_data(df, region_selected)
-        st.plotly_chart(fig, use_container_width=True)
+with tab3:
+    display_tab_content(filtered_data['diplomirani'], region_selected, 'Broj Diplomiranih Studenata', 'Trendovi za Diplomirane', 'purple', 3)
 
-    with tab5:
-        st.dataframe(df)
+with tab4:
+    fig = plot_combined_data(df, region_selected)
+    st.plotly_chart(fig, use_container_width=True)
 
-    df = df.fillna("null")
-    api_url = create_api(df)
-    st.link_button("REST API", api_url)
+with tab5:
+    st.dataframe(df)
 
-if __name__ == "__main__":
-    main()
+df = df.fillna("null")
+api_url = create_api(df)
+st.link_button("REST API", api_url)
