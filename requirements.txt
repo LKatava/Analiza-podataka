@@ -7,3 +7,4 @@ scikit-learn
 flask
 requests
 sqlalchemy
+psycopg2
