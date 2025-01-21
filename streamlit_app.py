@@ -113,7 +113,7 @@ def create_api(df):
 result = subprocess.run(['python', 'main.py'], capture_output=True, text=True)
 st.success(result.stdout, icon="✅")
 
-st.title("Analiza Podataka po Regijama")
+st.title("Analiza trendova obrazovanja i zapošljavanja u Hrvatskoj")
 
 df = load_data()
 
