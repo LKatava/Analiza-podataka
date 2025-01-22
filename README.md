@@ -1,3 +1,4 @@
+# Analiza trendova obrazovanja i zapošljavanja u Hrvatskoj
 Ovaj projekt analizira trendove završavanja obrazovanja (srednje škole i fakulteti) te
 stope zaposlenosti i nezaposlenosti u Hrvatskoj kroz regije i godine. Projekt ima za cilj pružiti
 jasnu vizualnu reprezentaciju i statistiˇcku analizu kako bi se razumjeli kljuˇcni socioekonomski
